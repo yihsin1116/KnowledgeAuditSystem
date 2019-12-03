@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath KnowledgeAuditSystem mKnowledgeAuditSystem.wsgi --log-file -

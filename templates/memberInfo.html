@@ -1,0 +1,188 @@
+{% extends "member_bar.html" %}
+
+{% block content %}
+		<div class="col-md-12">
+
+            <nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						我的拼圖
+					</li>
+
+					<li class="breadcrumb-item ">
+						個人檔案
+					</li>
+				</ol>
+			</nav>
+
+            <form class="form"  action="/memberInfo/" method="post">
+                {% csrf_token %}
+{#                <div class="media">#}
+{#                    http://cdn.onlinewebfonts.com/svg/img_275469.png#}
+{#                    <img class="mr-3" src="" style="width: 38px; height: 38px;">#}
+{#                    <div class="media-body">#}
+{#                        <label class="btn btn-outline-primary">#}
+{#                            {{ member_form.picture }}#}
+{#                            <input id="picture" style="display:none" type="file" name="picture">#}
+{#                            <i class="fa fa-photo"></i>上傳圖片#}
+{#                        </label>#}
+{#                    </div>#}
+{#                </div>#}
+              <div class="form-label-group">
+                  User ID
+                  <input type="text" id="id" class="form-control" required autofocus readonly value={{ request.session.userid }} >
+              </div>
+
+                </br>
+              <div class="form-label-group">
+                  Username
+                  {{ member_form.username }}
+
+{#                <input type="text" id="inputUserame" class="form-control" required autofocus>#}
+              </div>
+
+                </br>
+              <div class="form-label-group">
+                  Email address
+                  {{ member_form.email }}
+
+{#                <input type="email" id="inputEmail" class="form-control" required>#}
+              </div>
+                </br>
+              <div class="form-label-group">
+                  Password
+                  {{ member_form.password }}
+{#                <input type="password" id="inputPassword" class="form-control" required>#}
+              </div>
+                </br>
+              <div class="form-label-group">
+                  Enter Password Again
+                  {{ member_form.password2 }}
+{#                <input type="password" id="inputConfirmPassword" class="form-control" required>#}
+              </div>
+                </br>
+
+                <button type="submit" class="btn btn-primary">
+					修改
+				</button>
+            </form>
+
+		</div>
+
+
+    <div class="card mt-4">
+        <div class="container h-100 col-md-12">
+            <div class="card-body">
+          <h5 class="card-title">
+            我的經驗
+          </h5>
+          <i class="fas fa-exclamation-triangle" style="color: #F4623A">  新增工作經驗後成為老師身分，為職業職能新增內容。</i>
+             <hr>
+
+        {% for object in experience %}
+           <p>● {{object.field}} - {{object.career_name}} : {{object.year}}
+               <a href="/delete_experience/?userid={{ request.session.userid }}&field={{object.field}}&career_name={{object.career_name}}&year={{object.year}}" class="fa fa-close float-right" style="color: #F4623A"></a>
+           </p>
+        {% endfor %}
+
+        <form name="experience" action="/experience/" method="POST" novalidate="novalidate">
+            {% csrf_token %}
+        <div class="row" style="display:inline;">
+          <div>
+            <div class="form-row">
+              <div style="display:inline;">
+                <select name="field" id="field-list"  class="form-control" onChange="renew(this.selectedIndex);">
+                    <option disabled=disabled hidden selected=selected>請選擇領域</option>
+                    <option>網路管理
+	                <option>系統規劃
+	                <option>軟體工程
+	                <option>電子商務
+                    <option>分析管理
+                </select>
+              </div>
+              <div class="col-12 col-md-6 mb-2 mb-md-0" style="display:inline;">
+                <select name="career_id"  id="career_id" class="form-control">
+                    <option disabled=disabled hidden selected=selected value="0">請先選擇領域</option>
+                </select>
+              </div>
+              <div style="display:inline;">
+                <select name="year" id="year"  class="form-control">
+                    <option disabled=disabled hidden selected=selected>服務年數</option>
+                    <option value="1年以下">1年以下
+	                <option value="2-5年">2-5年
+	                <option value="6-8年">6-8年
+	                <option value="8-12年">8-12年
+                    <option value="12年以上">12年以上
+                </select>
+              </div>
+{##}
+{#                <br><br>#}
+{##}
+{#                <input name="description" id="description" type="text"  class="form-control" required autofocus >#}
+{##}
+{#               <br><br>#}
+              <div class="float-right">
+                <button type="submit" class="btn btn-primary">
+					新增
+				</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </section>
+
+    </div>
+    <script>
+		career_id=new Array();
+		//網路管理
+		career_id[1]=['資訊助理人員','MIS工程師' ,'資訊安全工程師' ,'資訊安全分析師' ,'MIS/網管主管'];
+		//系統規劃
+		career_id[2]=['系統維護工程師','資料庫管理師','系統工程師','系統分析師'];
+		//軟體工程
+		career_id[3]=['軟體工程師','APP工程師','網站及多媒體程式設計師'];
+        //電子商務
+        career_id[4]=['網站行銷企劃','電子商務技術主管'];
+        //分析管理
+        career_id[5]=['專案管理師','資料分析師'];
+
+
+		//另用一個陣列記取career對應的value
+		career_value=new Array();
+		//網路管理
+		career_value[1]=['資訊助理人員','MIS工程師' ,'資訊安全工程師' ,'資訊安全分析師' ,'MIS/網管主管'];
+		//系統規劃
+		career_value[2]=['系統維護工程師','資料庫管理師','系統工程師','系統分析師'];
+		//軟體工程
+		career_value[3]=['軟體工程師','APP工程師','網站及多媒體程式設計師'];
+        //電子商務
+        career_value[4]=['網站行銷企劃','電子商務技術主管'];
+        //分析管理
+        career_value[5]=['專案管理師','資料分析師'];
+
+
+
+		function renew(index){
+			for(var i=0 ; i < career_id[index].length;i++)
+				//新增select的選項
+				document.experience.career_id.options[i]=new Option(career_id[index][i], career_value[index][i]);
+			/*參考網站中筆者表示下面這行是為了「刪除多餘的選項」
+			然而我將之註解掉也可以正常執行，所以有沒有加這行的必要，個人還在理解中...*/
+			document.experience.career_id.length=career_id[index].length;
+		}
+
+	</script>
+
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}', '{{ field }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+
+  </div>
+
+     {% endblock %}

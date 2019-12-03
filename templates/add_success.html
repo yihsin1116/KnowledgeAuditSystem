@@ -1,0 +1,31 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+  <!-- Page Heading -->
+
+     <div class="form-group text-center">
+        <a href="/add/?career_id={{ request.session.career_id }}" class="btn btn-primary">
+			繼續新增
+		</a>
+        <a href="/search/?career_id={{ request.session.career_id }}" class="btn btn-primary">
+			回職業頁
+		</a>
+      </div>
+
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}', '{{ field }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+</div>
+
+<!-- /.container -->
+
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+m{% extends "member_bar.html" %}
+
+{% block content %}
+
+		<div class="col-md-12">
+            <br>
+            <nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						我的拼圖
+					</li>
+
+					<li class="breadcrumb-item">
+						未來規劃
+					</li>
+				</ol>
+			</nav>
+        <div class="btn-group btn-group-justified ">
+            <a href="/myPlan_skill/" class="btn btn-outline-warning">知識技能</a>
+            <a href="/myPlan_attitude/" class="btn btn-outline-warning">職務能力</a>
+            <a href="/myPlan_licence/" class="btn btn-outline-warning">相關證照</a>
+        </div>
+{#CONTENT#}
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              職務能力
+          </div>
+          <div class="card-body">
+              <a style="color: #F4623A">點擊 <a class="fa fa-check-square" style="color: #F4623A"> 表示已完成，從規畫表中移除!</a></a>
+              <table class="table table-bordered">
+                  <table class="table table-bordered">
+                  <tbody>
+                  {% for object in attitude_plan %}
+                    <tr>
+                      <td scope="row" style=" white-space:nowrap">{{object.career_attitude}}</td>
+                      <td align="center" width="20px">
+                        <a href="/delete_plan_attitude/?userid={{ request.session.userid }}&career_attitude={{object.career_attitude}}" class="fa fa-check-square float-right" style="color: #F4623A"></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+              </table>
+          </div>
+        </div>
+
+        {% if messages %}
+           <script>
+             {% for msg in messages %}
+                 alert('{{ msg.message }}', '{{ field }}');
+             {% endfor %}
+           </script>
+        {% endif %}
+
+		</div>
+     {% endblock %}

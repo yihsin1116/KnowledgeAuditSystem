@@ -1,0 +1,275 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<!-- Navigation -->
+
+  <!-- Page Content -->
+<section class="page-section">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3">
+
+          <div class="list-group">
+          <h5>網路管理</h5>
+              {% for object in network %}
+                  <a class="list-group-item" href="/career/?career_id={{object.career_id}}" >{{object.career_name}}</a>
+              {% endfor %}
+          </div>
+      <hr>
+          <div class="list-group">
+          <h5>系統規劃</h5>
+              {% for object in system %}
+                  <a class="list-group-item" href="/career/?career_id={{object.career_id}}" >{{object.career_name}}</a>
+              {% endfor %}
+          </div>
+      <hr>
+          <div class="list-group">
+          <h5>軟體工程</h5>
+              {% for object in software %}
+                  <a class="list-group-item" href="/career/?career_id={{object.career_id}}" >{{object.career_name}}</a>
+              {% endfor %}
+          </div>
+      <hr>
+          <div class="list-group">
+          <h5>電子商務</h5>
+              {% for object in eb %}
+                  <a class="list-group-item" href="/career/?career_id={{object.career_id}}" >{{object.career_name}}</a>
+              {% endfor %}
+          </div>
+      <hr>
+          <div class="list-group">
+          <h5>分析管理</h5>
+              {% for object in management %}
+                  <a class="list-group-item" href="/career/?career_id={{object.career_id}}" >{{object.career_name}}</a>
+              {% endfor %}
+          </div>
+      </div>
+      <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+        <div class="card mt-4">
+          <div class="card-body">
+            <div class="card-title">
+                <h3>{{content_career.career_name}}
+                <a href="/love/"><i id="heart" type="button" class="fa fa-heart fa-sm" style="color: #F4623A; border:none"></i></a>
+{#                    fa-heart-o#}
+                </h3>
+                <span class="badge badge-primary">{{content_career.field}}</span> <span class="badge badge-primary">{{content_career.career_type}}</span>
+
+                <a href="/add/?career_id={{ request.session.career_id }}">
+                    <i class="fa fa-plus-square fa-lg float-right" style="color: #F4623A" data-toggle="tooltip" data-placement="top" title="成為老師身分，為職業職能新增內容!"></i>
+                </a>
+
+            </div>
+
+            <a type="button" class="btn btn-success" href="/audit_personality/?career_id={{ request.session.career_id }}">知識盤點 ➜</a>
+
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            工作內容
+          </div>
+          <div class="card-body">
+            {% for object in content_info %}
+                <p>{{object.career_info}} </p>
+                <hr>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header" >
+            職業性向
+          </div>
+          <div class="card-body" style = "float:left;">
+             {% for object in content_personality %}
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> R - 實作型：{{object.personality_R}}　</a>
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> I - 研究型：{{object.personality_I}}　</a>
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> A - 藝術型：{{object.personality_A}}　</a>
+               <p></p>
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> S - 社交型：{{object.personality_S}}　</a>
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> E - 企業型：{{object.personality_E}}　</a>
+               <a style="display:inline;"><i class="fas fa fa-lightbulb-o" style="color: #F4623A"></i> C - 常規型：{{object.personality_C}}　</a>
+               <hr>
+            {% endfor %}
+
+             <body style="height: 10%; margin: 0" style = "float:right;">
+             <div id="chart" style="height: 500%"></div>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+             <script type="text/javascript">
+                var dom = document.getElementById("chart");
+                var myChart = echarts.init(dom);
+                var app = {};
+                option = null;
+                option = {
+                    title: {
+                            text: ''
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['性向職類']
+                    },
+                    radar: {
+                        // shape: 'circle',
+                        name: {
+                            textStyle: {
+                                color: '#fff',
+                                backgroundColor: '#999',
+                                borderRadius: 3,
+                                padding: [3, 5]
+                           }
+                        },
+                        indicator: [
+                           { name: 'R - 實作型', max: 100},
+                           { name: 'I - 研究型', max: 100},
+                           { name: 'A - 藝術型', max: 100},
+                           { name: 'S - 社交型', max: 100},
+                           { name: 'E - 企業型', max: 100},
+                           { name: 'C - 常規型', max: 100}
+                        ]
+                    },
+                    series: [{
+                        name: '',
+                        type: 'radar',
+                        // areaStyle: {normal: {}},
+                        data : [
+                            {
+                                {% for object in content_personality %}
+                                value : [{{ object.personality_R }}, {{ object.personality_I }}, {{ object.personality_A }}, {{ object.personality_S }}, {{ object.personality_E }}, {{ object.personality_C }}],
+                                {% endfor %}
+                                name : '性向職類'
+                            }
+                        ]
+                    }]
+                };;
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                       </script>
+
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              知識技能
+          </div>
+          <div class="card-body">
+              <table class="table table-bordered">
+                  <tbody>
+                  {% for object in content_skill %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_type}}</td>
+                      <td>{{object.skill_content}}</td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+
+{#             {% for object in content_skill %}#}
+{#               <p>{{object.career_skill}}</p>#}
+{#               <hr>#}
+{#            {% endfor %}#}
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              職務能力
+          </div>
+          <div class="card-body">
+             {% for object in content_attitude %}
+               <p>{{object.career_attitude}}</p>
+               <hr>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            相關證照
+          </div>
+          <div class="card-body">
+              {% for object in content_licence %}
+               <p>{{object.career_licence}}</p>
+               <hr>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            未來發展
+          </div>
+          <div class="card-body">
+             {% for object in content_fucture %}
+               <p>{{object.career_fucture}}</p>
+               <hr>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- /.card -->
+{#CONTENT#}
+
+{#message board#}
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+          <h6 class="border-bottom border-gray pb-2 mb-0">留言板</h6>
+            <br>
+          <form id="message" name="message" method="post" action="/message/">
+          {% csrf_token %}
+            <div class="form-group row">
+                <strong class="col-sm-2 col-form-label">{{ request.session.userid }}</strong>
+                <button type="submit" class="btn btn-outline-primary btn-sm float-right">Send</button>
+            </div>
+            <div class="form-group">
+                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+          </form>
+
+        {#留言內容#}
+        <hr>
+          {% for object in message %}
+             <div class="card mt-4">
+               <div class="container h-100 col-md-12">
+                  <div class="card-body">
+                  <h5 class="card-title" style="display:inline;">
+                    {{object.userid}}
+                  </h5>
+                  <div style="float:right;" style="display:inline;">{{object.time}}</div>
+                    <hr>{{object.content}}
+                  </div>
+               </div>
+             </div>
+          {% endfor %}
+
+ </div>
+	</div>
+
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}', '{{ field }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+      </div>
+      <!-- /.col-lg-9 -->
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

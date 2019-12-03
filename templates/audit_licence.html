@@ -1,0 +1,54 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+  <!-- Page Heading -->
+    <form class="form"  action="/audit_result/?career_id={{ request.session.career_id }}" method="POST">
+     {% csrf_token %}
+		<div class="col-lg-12">
+            <div class="card-title">
+                 <h4><a><i class="fa fa-arrow-left fa-lg float-left" style="color: #F4623A" ></i></a>  &nbsp;&nbsp;
+                 <label>{{content_career.career_name}}</label></h4>
+             </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            第四部分：相關證照
+          </div>
+          <div class="card-body">
+           <table class="table table-bordered">
+             <tbody>
+                <p>
+                {% for object in content_licence %}
+                 <td>{{object.career_licence}}</td>
+                 <td style=" white-space:nowrap">
+                 <input name="licence" id value="{{object.licence_id}}" type="hidden">
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.licence_id}}" type="radio" value="True">通過認證</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.licence_id}}" type="radio" value="False">尚未認證</label>
+                        </div>
+                 </td>
+
+            </tbody>
+                  {% endfor %}
+                </table>
+          </div>
+        </div>
+
+        <!-- /.card -->
+{#CONTENT#}
+     <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+			盤點完成
+		</button>
+      </div>
+     </form>
+</div>
+<!-- /.container -->
+
+</section>
+{% endblock %}

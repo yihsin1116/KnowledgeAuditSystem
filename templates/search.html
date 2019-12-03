@@ -1,0 +1,92 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<header class="fixhead">
+<section class="pricing py-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Free Tier -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card mb-5 mb-lg-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">網路管理</h5>
+            <hr>
+            <ul class="fa-ul">
+
+              {% for object in network %}
+              <li><a href="/career/?career_id={{object.career_id}}" class="fa-li" ><i class="fas fa-check"></i></a>{{object.career_name}}</li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Plus Tier -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card mb-5 mb-lg-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">系統規劃</h5>
+            <hr>
+            <ul class="fa-ul">
+
+              {% for object in system %}
+              <li><a href="/career/?career_id={{object.career_id}}" class="fa-li" ><i class="fas fa-check"></i></a>{{object.career_name}}</li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Pro Tier -->
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card mb-5 mb-lg-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">軟體工程</h5>
+            <hr>
+            <ul class="fa-ul">
+              {% for object in software %}
+              <li><a href="/career/?career_id={{object.career_id}}" class="fa-li"><i id='search' class="fas fa-check" href="search" value="{{object.career_id}}"></i></a>{{object.career_name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card mb-5 mb-lg-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">電子商務</h5>
+            <hr>
+            <ul class="fa-ul">
+
+              {% for object in eb %}
+              <li><a href="/career/?career_id={{object.career_id}}" class="fa-li"><i id='search' class="fas fa-check" href="search" name="{{object.career_id}}"></i></a>{{object.career_name}}</li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="card mb-5 mb-lg-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-muted text-uppercase text-center">分析管理</h5>
+            <hr>
+            <ul class="fa-ul">
+
+              {% for object in management %}
+              <li><a href="/career/?career_id={{object.career_id}}" class="fa-li"><i id='search' class="fas fa-check" href="search" name="{{object.career_id}}"></i></a>{{object.career_name}}</li>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</header>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+  <!-- Page Heading -->
+    <form class="form"  action="/audit_attitude/?career_id={{ request.session.career_id }}" method="POST">
+     {% csrf_token %}
+		<div class="col-lg-12">
+            <div class="card-title">
+                 <h4><a><i class="fa fa-arrow-left fa-lg float-left" style="color: #F4623A" ></i></a>  &nbsp;&nbsp;
+                 <label>{{content_career.career_name}}</label></h4>
+             </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              第二部分：知識技能
+          </div>
+          <div class="card-body">
+              <table class="table table-bordered">
+                  <tbody>
+                  <i class="fas fa-info-circle" style="color: #F4623A">  1表示非常不熟悉 5表示非常熟悉</i>
+                  <p>
+                  {% for object in content_skill %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_type}}</td>
+                      <td>{{object.skill_content}}</td>
+                      <td style=" white-space:nowrap">
+                        <input name="skill" id="skill_id" value="{{object.skill_id}}" type="hidden">
+{#                          選項#}
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.skill_id}}" type="radio" value="1" required>1</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.skill_id}}" type="radio" value="2" required>2</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.skill_id}}" type="radio" value="3" required>3</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.skill_id}}" type="radio" value="4" required>4</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.skill_id}}" type="radio" value="5" required>5</label>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+          </div>
+        </div>
+
+        <!-- /.card -->
+{#CONTENT#}
+     <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+			盤點完成，前往第三部分
+		</button>
+      </div>
+     </form>
+</div>
+<!-- /.container -->
+
+</section>
+{% endblock %}

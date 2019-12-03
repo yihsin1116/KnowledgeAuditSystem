@@ -1,0 +1,116 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading -->
+
+<form class="form"  action="/addCareer/" method="post">
+    {% csrf_token %}
+  <div class="card-title">
+     <h4><a href=""><i class="fa fa-arrow-left fa-lg float-left" style="color: #F4623A"></i></a>  &nbsp;&nbsp;
+         <label>{{content_career.career_name}}</label></h4>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            工作內容
+          </h4>
+             <hr>
+            <div class="input-group">
+              <input name="career_info" id="career_info" type="text" class="form-control" >
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            未來發展
+          </h4>
+             <hr>
+            <div class="input-group">
+              <input name="career_fucture" id="career_fucture" type="text" class="form-control" >
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            知識技能
+          </h4>
+             <hr>
+            <table class="table table-bordered" width="100%" style="table-layout:fixed">
+                  <tbody>
+            <tr>
+                <td scope="row" style=" white-space:nowrap">主要職責(EX:系統開發準備)</td>
+                <td style=" white-space:nowrap">工作任務(EX:協助擬定系統化架構)</td>
+                <td>知識技能(EX:具備系統分析方法的知識。)</td>
+            </tr>
+                  </tbody>
+            </table>
+            <div class="input-group">
+              <input name="career_skill" id="career_skill" type="text" class="form-control" >
+              <input name="skill_type" id="skill_type" type="text" class="form-control" >
+              <input name="skill_content" id="skill_content" type="text" class="form-control" >
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            職務能力
+          </h4>
+             <hr>
+            <div class="input-group">
+              <input name="career_attitude" id="career_attitude" type="text" class="form-control" >
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            相關證照
+          </h4>
+             <hr>
+            <div class="input-group">
+              <input name="career_licence" id="career_licence" type="text" class="form-control" >
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+     <div class="col-lg-12 mb-4 form-group text-center">
+        <button type="submit" class="btn btn-primary">
+			新增
+		</button>
+      </div>
+
+</form>
+
+</div>
+<!-- /.container -->
+</section>
+
+{% endblock %}

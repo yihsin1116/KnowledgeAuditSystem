@@ -1,0 +1,36 @@
+{% extends "member_bar.html" %}
+
+{% block content %}
+		<div class="col-md-12">
+            <br>
+            <nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						我的拼圖
+					</li>
+
+					<li class="breadcrumb-item">
+						知識盤點
+					</li>
+				</ol>
+			</nav>
+
+{#CONTENT#}
+
+        <div class="col-md-8 mb-4">
+
+        {% for object in audit %}
+            <div class="card h-100">
+
+                <div class="card-body">
+            <h6><label>{{ object.career_id.career_name }}</label>
+                <a href="/myAudit_result/?audit_id={{ object.audit_id }}"><i class="fa fa-arrow-right fa-lg float-right" style="color: #F4623A"></i></a>  &nbsp;&nbsp;
+            </h6>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+
+		</div>
+     {% endblock %}

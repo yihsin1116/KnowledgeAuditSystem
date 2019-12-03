@@ -1,0 +1,63 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+  <!-- Page Heading -->
+    <form class="form"  action="/audit_licence/?career_id={{ request.session.career_id }}" method="POST">
+     {% csrf_token %}
+		<div class="col-lg-12">
+            <div class="card-title">
+                 <h4><a><i class="fa fa-arrow-left fa-lg float-left" style="color: #F4623A" ></i></a>  &nbsp;&nbsp;
+                 <label>{{content_career.career_name}}</label></h4>
+             </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              第三部分：職務能力
+          </div>
+          <div class="card-body">
+          <table class="table table-bordered">
+             <tbody>
+                <i class="fas fa-info-circle" style="color: #F4623A">  1表示非常不熟悉 5表示非常熟悉</i>
+                <p>
+                {% for object in content_attitude %}
+                 <td>{{object.career_attitude}}</td>
+                 <td style=" white-space:nowrap">
+                 <input name="attitude" id value="{{object.attitude_id}}" type="hidden">
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.attitude_id}}" type="radio" value="1">1</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.attitude_id}}" type="radio" value="2">2</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.attitude_id}}" type="radio" value="3">3</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.attitude_id}}" type="radio" value="4">4</label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label><input name="score_{{object.attitude_id}}" type="radio" value="5">5</label>
+                        </div>
+                 </td>
+
+            </tbody>
+                  {% endfor %}
+                </table>
+          </div>
+        </div>
+        <!-- /.card -->
+{#CONTENT#}
+     <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+			盤點完成，前往第四部分
+		</button>
+      </div>
+     </form>
+</div>
+<!-- /.container -->
+
+</section>
+{% endblock %}

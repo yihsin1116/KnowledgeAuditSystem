@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>資識盤點</title>
+    <link href="../static/css/creative.css" rel="stylesheet">
+    <link href="../static/css/creative.min.css" rel="stylesheet">
+    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'>
+</head>
+
+<body id="page-top">
+  <!-- Navigation -->
+
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id=fixNav>
+    <div class="container"  style="position:sticky;" >
+      <a class="navbar-brand js-scroll-trigger" href="/home/">資識拼圖</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/search/">職業列表</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/links/">相關連結</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/memberInfo/">我的拼圖</a>
+          </li>
+          <li class="nav-item">
+             {% if request.session.userid %}
+                 <a class="nav-link js-scroll-trigger" href="/logout/">登出</a>
+             {% else %}
+                 <a class="nav-link js-scroll-trigger" href="/login/">登入</a>
+             {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- Body -->
+
+{% block body %} {% endblock %}
+
+  <!-- Footer -->
+  <footer class="bg-light py-5">
+    <div class="container">
+      <div class="small text-center text-muted">Copyright &copy; 2019</div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../static/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../static/js/creative.min.js"></script>
+
+
+</body>
+</html>

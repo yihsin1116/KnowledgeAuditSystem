@@ -1,0 +1,211 @@
+{% extends "bar_fixed.html" %}
+
+{% block body %}
+<section class="page-section">
+    <!-- Page Content -->
+<div class="container">
+  <!-- Page Heading -->
+
+		<div class="col-lg-12">
+            <div class="card-title">
+                 <h4><a><i class="fa fa-arrow-left fa-lg float-left" style="color: #F4623A" ></i></a>  &nbsp;&nbsp;
+                 <label>{{content_career.career_name}}</label></h4>
+             </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header" >
+            性向職類
+          </div>
+          <div class="card-body">
+               <p>R - 實作型：{{result_personality.audit_personality_R}}</p>
+               <p>I - 研究型：{{result_personality.audit_personality_I}}</p>
+               <p>A - 藝術型：{{result_personality.audit_personality_A}}</p>
+               <p>S - 社交型：{{result_personality.audit_personality_S}}</p>
+               <p>E - 企業型：{{result_personality.audit_personality_E}}</p>
+               <p>C - 常規型：{{result_personality.audit_personality_C}}</p>
+               <hr>
+          </div>
+        </div>
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              知識技能
+          </div>
+          <div class="card-body">
+              <table class="table table-bordered">
+                <i class="fas fa-info-circle" style="color: #F4623A">  1表示非常不熟悉 5表示非常熟悉</i>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 5分:非常熟悉</i>
+                  {% for object in result_skill_5 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.skill_id.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_id.skill_type}}</td>
+                      <td>{{object.skill_id.skill_content}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 4分:熟悉</i>
+                  {% for object in result_skill_4 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.skill_id.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_id.skill_type}}</td>
+                      <td>{{object.skill_id.skill_content}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 3分:尚可</i>
+                  {% for object in result_skill_3 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.skill_id.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_id.skill_type}}</td>
+                      <td>{{object.skill_id.skill_content}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 2分:熟悉</i>
+                  {% for object in result_skill_2 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.skill_id.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_id.skill_type}}</td>
+                      <td>{{object.skill_id.skill_content}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 1分:非常不熟悉</i>
+                  {% for object in result_skill_1 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.skill_id.career_skill}}</th>
+                      <td style=" white-space:nowrap">{{object.skill_id.skill_type}}</td>
+                      <td>{{object.skill_id.skill_content}}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+
+                </table>
+          </div>
+        </div>
+
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              職務能力
+          </div>
+          <div class="card-body">
+          <table class="table table-bordered">
+                <i class="fas fa-info-circle" style="color: #F4623A">  1表示非常不熟悉 5表示非常熟悉</i>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 5分:非常熟悉</i>
+                  {% for object in result_attitude_5 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.attitude_id.career_attitude}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><p><i class="fas fa-star" style="color: #F4623A"> 4分:熟悉</i>
+                  {% for object in result_attitude_4 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.attitude_id.career_attitude}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><p><i class="fas fa-star" style="color: #F4623A"> 3分:尚可</i>
+                  {% for object in result_attitude_3 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.attitude_id.career_attitude}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><p><i class="fas fa-star" style="color: #F4623A"> 2分:熟悉</i>
+                  {% for object in result_attitude_2 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.attitude_id.career_attitude}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><p><i class="fas fa-star" style="color: #F4623A"> 1分:非常不熟悉</i>
+                  {% for object in result_attitude_1 %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.attitude_id.career_attitude}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+
+                </table>
+          </div>
+        </div>
+         <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+              相關證照
+          </div>
+          <div class="card-body">
+          <table class="table table-bordered">
+                <i class="fas fa-info-circle" style="color: #F4623A">  1表示非常不熟悉 5表示非常熟悉</i>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><i class="fas fa-star" style="color: #F4623A"> 通過認證</i>
+                  {% for object in result_licence_true %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.licence_id.career_licence}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+              <hr>
+                  <table class="table table-bordered">
+                  <tbody>
+                  <p><p><i class="fas fa-star" style="color: #F4623A"> 尚未認證</i>
+                  {% for object in result_licence_false %}
+                    <tr>
+                      <th scope="row" style=" white-space:nowrap">{{object.licence_id.career_licence}}</th>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+
+                </table>
+          </div>
+        </div>
+
+<!-- /.container -->
+</div>
+</section>
+{% endblock %}

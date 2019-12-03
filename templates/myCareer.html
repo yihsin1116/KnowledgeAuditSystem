@@ -1,0 +1,44 @@
+{% extends "member_bar.html" %}
+
+{% block content %}
+		<div class="col-md-12">
+            <br>
+            <nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						我的拼圖
+					</li>
+
+					<li class="breadcrumb-item">
+						我的收藏
+					</li>
+				</ol>
+			</nav>
+{#CONTENT#}
+
+    <div class="row">
+    <div class="col-lg-4 col-sm-6 mb-4">
+      {% for object in love %}
+      <div class="card">
+        <div class="card-body" style="display:inline;">
+            <a>{{ object.career_id.career_name }}</a>
+            <a href="/delete_love/?career_name={{ object.career_id.career_name }}"><i class="fa fa-heart fa-lg float-right" style="color: #F4623A"></i></a>
+        </div>
+      </div>
+      <hr>
+      {% endfor %}
+    </div>
+	</div>
+
+
+    {% if messages %}
+       <script>
+          {% for msg in messages %}
+              alert('{{ msg.message }}', '{{ field }}');
+          {% endfor %}
+       </script>
+    {% endif %}
+
+
+
+{% endblock %}
